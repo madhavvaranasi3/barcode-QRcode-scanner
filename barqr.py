@@ -9,12 +9,10 @@ def read_barcode(frame):
         barcode_info = barcode.data.decode('utf-8')
         print(f"{barcode.type} : {barcode_info}")
         time.sleep(1)
-        # Draw a rectangle around the barcode
         cv2.rectangle(frame, (x, y), (x + w, y + h), (8, 255, 0), 2)
         font = cv2.FONT_HERSHEY_DUPLEX
         cv2.putText(frame, barcode_info, (x + 6, y - 6), font, 0.5, (255, 255, 255), 1)
 
-        # Write to file
         write_to_file(barcode_info)
     return frame
 
@@ -41,7 +39,7 @@ def main():
             frame = read_barcode(frame)
             cv2.imshow("Barcode/QR code reader", frame)
             
-            if cv2.waitKey(1) & 0xFF == 27:  # Press 'Esc' to exit
+            if cv2.waitKey(1) & 0xFF == 27:
                 break
     except Exception as e:
         print(f"An error occurred: {e}")
